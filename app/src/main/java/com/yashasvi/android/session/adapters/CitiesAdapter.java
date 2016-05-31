@@ -20,6 +20,11 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesViewHolder> {
         this.cities = cities;
     }
 
+    public void addContact(City contact) {
+        cities.add(contact);
+        notifyDataSetChanged();
+    }
+
     @Override
     public CitiesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
