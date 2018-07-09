@@ -1,5 +1,5 @@
 # dojo-android-session
-This repository contains the demo project that I have used for the android session that I took in Dojo Bali.
+This repository contains the demo project that I have used for the [android session](https://www.facebook.com/events/191970791469103/) that I took in Dojo Bali.
 The targeted audience for the session are the people who are completely new to android.
 
 
