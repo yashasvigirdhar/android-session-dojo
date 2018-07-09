@@ -15,11 +15,7 @@ I have covered the following topics :
 - Permissions
 
 
-<<<<<<< HEAD
-The repository contains different branches, each corresponding to a particular functionality. So, if you want to see the code changes for a particular functionality, you can just see the diff between this branch and the its previous branch.
-=======
 The repository contains different branches, each corresponding to a particular functionality. So, if you want to see the code changes for a particular functionality, you can just see the diff between this branch and the its previous branch. 
->>>>>>> fba20b4... Update README.md
 
 Here's the order in which I have prepared the branches :
 
