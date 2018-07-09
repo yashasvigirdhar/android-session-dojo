@@ -3,8 +3,10 @@ package com.yashasvi.android.session.models;
 public class City {
 
     private String name, description;
+    private long id;
 
-    public City(String name, String description) {
+    public City(long id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
@@ -23,5 +25,14 @@ public class City {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public City setId(long id) {
+        this.id = id;
+        return this;
     }
 }

@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import com.yashasvi.android.session.R;
 import com.yashasvi.android.session.adapters.CitiesAdapter;
+import com.yashasvi.android.session.db.CitiesDAO;
 import com.yashasvi.android.session.models.City;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private List<City> cities;
 
+    CitiesDAO citiesDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initialize() {
-        initializeDataset();
+        initializeDatabase();
         initializeViews();
         initializeAddContactDialog();
     }
 
-    private void initializeDataset() {
-        cities = new ArrayList<>();
-        cities.add(new City("Bali", "Canggu"));
-        cities.add(new City("Bali", "Ubud"));
-        cities.add(new City("Thailand", "Chiang Mai"));
-        cities.add(new City("Hungary", "Budapest"));
+    private void initializeDatabase() {
+        citiesDAO = new CitiesDAO(this);
+        citiesDAO.open();
+        cities = citiesDAO.getAllCities();
         citiesAdapter = new CitiesAdapter(cities);
     }
 
@@ -83,7 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bOk:
                 if (validateInput()) {
-                    citiesAdapter.addContact(new City(etName.getText().toString(), etDescription.getText().toString()));
+                    City city = citiesDAO.addCity(etName.getText().toString(), etDescription.getText().toString());
+                    citiesAdapter.addContact(city);
                 }
             case R.id.bCancel:
                 etName.setText("");
@@ -100,5 +101,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         Toast.makeText(this, "Name or Description Can't be empty", Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    @Override
+    protected void onPause() {
+        citiesDAO.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        citiesDAO.open();
+        super.onResume();
     }
 }
